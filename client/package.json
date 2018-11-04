@@ -7,6 +7,7 @@
     "@types/node": "10.12.2",
     "@types/react": "16.4.18",
     "@types/react-dom": "16.0.9",
+    "axios": "^0.18.0",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
     "react-scripts": "2.1.1",
@@ -27,5 +28,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@types/axios": "^0.14.0"
+  }
 }
