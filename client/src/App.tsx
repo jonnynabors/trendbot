@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 import { getRankingsForCharacter } from './api/Network';
+import { doThing } from './RankingsService';
+// @ts-ignore
+import { XYPlot, LineSeries, YAxis, XAxis, HorizontalGridLines, VerticalGridLines } from 'react-vis';
 
-class App extends Component {
-
+interface State {
+  rankings: any
+}
+class App extends Component<{}, State> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      rankings: {}
+    }
+  }
   async componentWillMount() {
     try {
-      const rankings = await(getRankingsForCharacter('corrupting'));
-      console.log(rankings);
+      const rankings = await (getRankingsForCharacter('corrupting'));
+      this.setState({
+        rankings: doThing(rankings)
+      })
     }
-    catch(err) {
+    catch (err) {
       console.log('something went wrong');
     }
   }
@@ -19,10 +30,17 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.tsx</code> and save to reload.
-          </p>
+          <XYPlot height={500} width={800}>
+            <VerticalGridLines />
+            <HorizontalGridLines />
+            <XAxis xType="time-utc" title="date" />
+            <YAxis title={this.state.rankings.name} />
+            <LineSeries style={{
+              strokeLinejoin: 'round',
+              strokeWidth: 4
+            }}
+              data={this.state.rankings.data} />
+          </XYPlot>
         </header>
       </div>
     );
