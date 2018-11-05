@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { getRankingsForCharacter } from './api/Network';
 import { doThing } from './RankingsService';
 // @ts-ignore
-import { XYPlot, LineSeries, YAxis, XAxis, HorizontalGridLines, VerticalGridLines } from 'react-vis';
+import { XYPlot, LineMarkSeries, YAxis, XAxis, HorizontalGridLines, VerticalGridLines } from 'react-vis';
+import _ from 'underscore';
 
 interface State {
   rankings: any
@@ -17,8 +18,9 @@ class App extends Component<{}, State> {
   async componentWillMount() {
     try {
       const rankings = await (getRankingsForCharacter('corrupting'));
+      const modifiedRankings = await (doThing(rankings));
       this.setState({
-        rankings: doThing(rankings)
+        rankings: modifiedRankings
       })
     }
     catch (err) {
@@ -26,22 +28,33 @@ class App extends Component<{}, State> {
     }
   }
 
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <XYPlot height={500} width={800}>
+  renderGraphs() {
+    if (_.isEmpty(this.state.rankings)) return <div>...Loading</div>
+      return this.state.rankings.map((ranking: any, index: number) => {
+        return (
+          <XYPlot height={300} width={500} key={index}>
             <VerticalGridLines />
             <HorizontalGridLines />
             <XAxis xType="time-utc" title="date" />
-            <YAxis title={this.state.rankings.name} />
-            <LineSeries style={{
-              strokeLinejoin: 'round',
-              strokeWidth: 4
-            }}
-              data={this.state.rankings.data} />
+            <YAxis title={ranking.name} />
+            <LineMarkSeries
+              style={{
+                strokeLinejoin: 'round',
+                strokeWidth: 4
+              }}
+              data={ranking.data}
+            />
           </XYPlot>
-        </header>
+        )
+      })
+    
+  }
+
+  render() {
+    if (!this.state.rankings) return <div>...Loading</div>
+    return (
+      <div className="App">
+        {this.renderGraphs()}
       </div>
     );
   }
