@@ -12,7 +12,7 @@ const styles = (theme: Theme) => createStyles({
     display: 'flex',
   },
   toolbar: {
-    paddingRight: 12, // keep right padding when drawer closed
+    paddingRight: 24, // keep right padding when drawer closed
   },
   toolbarIcon: {
     display: 'flex',
@@ -60,7 +60,7 @@ const styles = (theme: Theme) => createStyles({
     }),
     width: theme.spacing.unit * 7,
     [theme.breakpoints.up('sm')]: {
-      width: theme.spacing.unit * 9,
+      width: 0,
     },
   },
   appBarSpacer: theme.mixins.toolbar,

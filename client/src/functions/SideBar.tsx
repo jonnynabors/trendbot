@@ -21,10 +21,9 @@ class SideBar extends React.Component<Props, {}> {
         return (
             <Drawer
                 variant="permanent"
-                // @ts-ignore
                 classes={{
                     paper: classNames(this.props.classes.drawerPaper, !this.props.open && this.props.classes.drawerPaperClose),
-                  }}
+                }}
                 open={this.props.open}
             >
                 <div className={this.props.classes.toolbarIcon}>
@@ -33,14 +32,14 @@ class SideBar extends React.Component<Props, {}> {
                     </IconButton>
                 </div>
                 <Divider />
-            <List>
-                <ListItem button>
-                    Rankings
+                <List>
+                    <ListItem button>
+                        Rankings
+                    </ListItem>
+                    <ListItem button>
+                        Parses
             </ListItem>
-                <ListItem button>
-                    Parses
-            </ListItem>
-            </List>
+                </List>
             </Drawer>
         )
     }
