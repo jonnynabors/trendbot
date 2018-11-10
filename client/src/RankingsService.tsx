@@ -11,23 +11,16 @@ const bossNames = [
   "G'huun"
 ];
 
-type DataSet = {
-  name: string;
-  data: any[];
-};
-
 export function doThing(data: any) {
-  let datas: DataSet[] = [];
-
   return bossNames.map(bossName => {
     return data
-      .filter((ranking: any) => {
+      .filter((ranking: Ranking) => {
         return ranking.encounterName == bossName && ranking.difficulty == 4;
       })
-      .sort(function(a: any, b: any) {
+      .sort(function(a: Ranking, b: Ranking) {
         return a.percentile > b.percentile;
       })
-      .map((ranking: any) => {
+      .map((ranking: Ranking) => {
         return ranking
       });
   });

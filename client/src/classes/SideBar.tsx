@@ -2,6 +2,7 @@ import React from "react";
 import { Drawer, List, ListItem, IconButton, Divider } from "@material-ui/core";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import classNames from "classnames";
+import { Link } from "react-router-dom";
 
 interface Props {
   open: boolean;
@@ -15,8 +16,8 @@ interface Props {
 class SideBar extends React.Component<Props, {}> {
   constructor(props: Props) {
     super(props);
-    console.log(this.props.classes);
   }
+
   render() {
     return (
       <Drawer
@@ -36,7 +37,9 @@ class SideBar extends React.Component<Props, {}> {
         </div>
         <Divider />
         <List>
-          <ListItem button>Rankings</ListItem>
+          <ListItem button>
+            <Link to="/rankings" onClick={this.props.closeDrawer}>Rankings</Link>
+          </ListItem>
           <ListItem button>Parses</ListItem>
         </List>
       </Drawer>

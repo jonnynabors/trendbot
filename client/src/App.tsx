@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import classNames from "classnames";
 import NavBar from "./functions/NavBar";
-import SideBar from "./functions/SideBar";
+import SideBar from "./classes/SideBar";
 import { CssBaseline } from "@material-ui/core";
 import { withStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Rankings from "./classes/Rankings";
+import Dashboard from "./functions/Dashboard";
+import { Route } from "react-router-dom";
 
 const drawerWidth = 240;
 const styles = (theme: Theme) =>
@@ -101,6 +103,7 @@ class App extends Component<Props, State> {
   };
 
   handleDrawerClose = () => {
+    console.log('hey')
     this.setState({ open: false });
   };
 
@@ -135,7 +138,8 @@ class App extends Component<Props, State> {
         />
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-          <Rankings />
+          <Route path="/" exact component={Dashboard} />
+          <Route path="/rankings" component={Rankings}/>
         </main>
       </div>
     );

@@ -1,6 +1,7 @@
 import React from "react";
 import { AppBar, Toolbar, Typography, IconButton } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+import { Link } from "react-router-dom";
 
 export default function NavBar(props: any) {
   return (
@@ -28,7 +29,7 @@ export default function NavBar(props: any) {
           noWrap
           className={props.classNames.titleClassName}
         >
-          TrendBot
+          <Link to="/">TrendBot</Link>
         </Typography>
       </Toolbar>
     </AppBar>
