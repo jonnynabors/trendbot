@@ -10,10 +10,8 @@ export function doThing(data: any) {
 
     bossNames.forEach(bossName => {
         const goodData = data.filter((ranking: any) => {
-            // @ts-ignore
             return ranking.encounterName == bossName && ranking.difficulty == 4;
         }).sort(function (a: any, b: any) {
-            // @ts-ignore
             return a.startTime - b.startTime;
         }).map((ranking: any) => {
             console.log(ranking);

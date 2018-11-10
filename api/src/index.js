@@ -18,8 +18,18 @@ app.use(cors());
 app.use(morgan('combined'));
 weasel.setApiKey('060713a86c4adbe17419655e7dd6026d');
 
-app.get('/:name', (req, res) => {
+app.get('/rankings/:name', (req, res) => {
     weasel.getRankingsCharacter(req.params.name, "zuljin", 'us', {}, (err, data) => {
+        if(err) {
+            console.log(req.params.name);
+            console.log(err)
+        }
+        res.send(data);
+    });
+});
+
+app.get('/parses/:name', (req, res) => {
+    weasel.getParsesCharacter(req.params.name, "zuljin", 'us', {}, (err, data) => {
         if(err) {
             console.log(req.params.name);
             console.log(err)
@@ -27,7 +37,7 @@ app.get('/:name', (req, res) => {
         console.log(data);
         res.send(data);
     });
-  });
+});
 
 // start server
 app.listen(8081, () => {
