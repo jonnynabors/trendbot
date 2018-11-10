@@ -1,21 +1,38 @@
 import React from 'react';
 import { Drawer, List, ListItem, IconButton, Divider } from "@material-ui/core";
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import classNames from 'classnames';
 
-export default function SideBar(props: any) {
-    return (
-        <Drawer
-            variant="permanent"
-            anchor="left"
-            className={props.classes.paper}
-            open={props.open}
-        >
-        <div className={props.classes.toolbarIcon}>
-            <IconButton onClick={props.closeDrawer}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </div>
-          <Divider />
+interface Props {
+    open: boolean,
+    closeDrawer: any,
+    classes: {
+        drawerPaper: string,
+        drawerPaperClose: string,
+        toolbarIcon: string
+    }
+}
+class SideBar extends React.Component<Props, {}> {
+    constructor(props: Props) {
+        super(props);
+        console.log(this.props.classes);
+    }
+    render() {
+        return (
+            <Drawer
+                variant="permanent"
+                // @ts-ignore
+                classes={{
+                    paper: classNames(this.props.classes.drawerPaper, !this.props.open && this.props.classes.drawerPaperClose),
+                  }}
+                open={this.props.open}
+            >
+                <div className={this.props.classes.toolbarIcon}>
+                    <IconButton onClick={this.props.closeDrawer}>
+                        <ChevronLeftIcon />
+                    </IconButton>
+                </div>
+                <Divider />
             <List>
                 <ListItem button>
                     Rankings
@@ -24,6 +41,9 @@ export default function SideBar(props: any) {
                     Parses
             </ListItem>
             </List>
-        </Drawer>
-    )
+            </Drawer>
+        )
+    }
 }
+
+export default SideBar;

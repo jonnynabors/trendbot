@@ -3,17 +3,16 @@ import classNames from 'classnames';
 import NavBar from './functions/NavBar';
 import SideBar from './functions/SideBar';
 import { CssBaseline } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Rankings from './classes/Rankings';
 
 const drawerWidth = 240;
-
-const styles = (theme: any) => ({
+const styles = (theme: Theme) => createStyles({
   root: {
     display: 'flex',
   },
   toolbar: {
-    paddingRight: 24, // keep right padding when drawer closed
+    paddingRight: 12, // keep right padding when drawer closed
   },
   toolbarIcon: {
     display: 'flex',
@@ -48,8 +47,6 @@ const styles = (theme: any) => ({
     flexGrow: 1,
   },
   drawerPaper: {
-    position: 'relative',
-    whiteSpace: 'nowrap',
     width: drawerWidth,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
@@ -57,7 +54,6 @@ const styles = (theme: any) => ({
     }),
   },
   drawerPaperClose: {
-    overflowX: 'hidden',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -111,8 +107,9 @@ class App extends Component<Props, State> {
     const { classes } = this.props;
     return (
       <div>
+        <CssBaseline/>
         <NavBar
-          className={{
+          classNames={{
             toolbarClasses: classNames(classes.appBar,
               this.state.open && classes.appBarShift),
             navbarClasses: classNames(classes.toolbar),
@@ -126,7 +123,9 @@ class App extends Component<Props, State> {
         />
         <SideBar
           classes={{
-            paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
+            drawerPaper: classes.drawerPaper, 
+            drawerPaperClose: classes.drawerPaperClose,
+            toolbarIcon: classes.toolbarIcon
           }}
           open={this.state.open}
           closeDrawer={this.handleDrawerClose.bind(this)}
@@ -135,13 +134,9 @@ class App extends Component<Props, State> {
           <div className={classes.appBarSpacer} />
           <Rankings />
         </main>
-        <div>
-          asdf
-        </div>
       </div>
     );
   }
 }
 
-// @ts-ignore
 export default withStyles(styles)(App);

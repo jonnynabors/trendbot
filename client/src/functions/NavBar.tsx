@@ -3,21 +3,20 @@ import { AppBar, Toolbar, Typography, IconButton } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
 
 export default function NavBar(props: any) {
-  console.log(props)
   return (
     <AppBar
       position="absolute"
       color="primary"
-      className={props.className.toolbarClasses}>
+      className={props.classNames.toolbarClasses}>
       <Toolbar
-        className={props.navbarClasses}
+        className={props.classNames.navbarClasses}
         disableGutters={!props.open}
       >
         <IconButton
           color="inherit"
           aria-label="Open drawer"
           onClick={props.openDrawer}
-          className={props.iconButtonClasses}
+          className={props.classNames.iconButtonClasses}
         >
           <MenuIcon />
         </IconButton>
@@ -26,7 +25,7 @@ export default function NavBar(props: any) {
           variant="h6"
           color="inherit"
           noWrap
-          className={props.titleClassName}
+          className={props.classNames.titleClassName}
         >
           TrendBot
               </Typography>
