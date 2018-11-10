@@ -4,9 +4,9 @@ import { doThing } from './RankingsService';
 // @ts-ignore
 import { XYPlot, LineMarkSeries, YAxis, XAxis, HorizontalGridLines, VerticalGridLines } from 'react-vis';
 import _ from 'underscore';
-import Typography from "@material-ui/core/Typography";
-import Toolbar from "@material-ui/core/Toolbar";
-import AppBar from "@material-ui/core/AppBar";
+import NavBar from './functions/NavBar';
+import SideBar from './functions/SideBar';
+import { CssBaseline } from '@material-ui/core';
 
 interface State {
   rankings: any,
@@ -59,28 +59,26 @@ class App extends Component<{}, State> {
   async submitCharacterName() {
     await this.fetchCharacterData();
   }
-  
+
   handleChange(event: any) {
-    this.setState({characterName: event.target.value});
+    this.setState({ characterName: event.target.value });
   }
 
   render() {
     if (!this.state.rankings) return <div>...Loading</div>
     return (
       <div className="App">
-          <AppBar position="static" color="primary">
-              <Toolbar>
-                  <Typography variant="h6" color="inherit">
-                      Trendbot
-                  </Typography>
-              </Toolbar>
-          </AppBar>
+        <CssBaseline />
+        <NavBar />
+        <SideBar />
+        <main>
           <label>
             Name:
           <input type="text" value={this.state.characterName} onChange={this.handleChange.bind(this)} />
           </label>
           <button type="submit" onClick={this.submitCharacterName.bind(this)}>Submit</button>
-        {this.renderGraphs()}
+          {this.renderGraphs()}
+        </main>
       </div>
     );
   }
