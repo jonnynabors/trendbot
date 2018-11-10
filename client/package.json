@@ -27,7 +27,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "find src/ -type f -iname '*.tsx' -or -iname '*.d.ts' | xargs prettier --write",
+    "format": "find src/ -type f -iname '*.tsx' -or -iname '*.d.ts' | xargs prettier --write"
   },
   "eslintConfig": {
     "extends": "react-app"

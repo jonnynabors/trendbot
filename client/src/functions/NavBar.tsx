@@ -1,13 +1,14 @@
-import React from 'react';
+import React from "react";
 import { AppBar, Toolbar, Typography, IconButton } from "@material-ui/core";
-import MenuIcon from '@material-ui/icons/Menu';
+import MenuIcon from "@material-ui/icons/Menu";
 
 export default function NavBar(props: any) {
   return (
     <AppBar
       position="absolute"
       color="primary"
-      className={props.classNames.toolbarClasses}>
+      className={props.classNames.toolbarClasses}
+    >
       <Toolbar
         className={props.classNames.navbarClasses}
         disableGutters={!props.open}
@@ -28,8 +29,8 @@ export default function NavBar(props: any) {
           className={props.classNames.titleClassName}
         >
           TrendBot
-              </Typography>
+        </Typography>
       </Toolbar>
     </AppBar>
-  )
+  );
 }
