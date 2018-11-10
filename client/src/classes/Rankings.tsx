@@ -1,16 +1,9 @@
 import React, { Component } from "react";
 import { getRankingsForCharacter } from "../api/Network";
 import { doThing } from "../RankingsService";
-// @ts-ignore
-import {
-  XYPlot,
-  LineMarkSeries,
-  YAxis,
-  XAxis,
-  HorizontalGridLines,
-  VerticalGridLines
-} from "react-vis";
 import _ from "underscore";
+import { Card, CardContent, Typography } from "@material-ui/core";
+import { Ranking } from "../data/Ranking";
 
 interface State {
   rankings: any;
@@ -24,6 +17,7 @@ class Rankings extends Component<{}, State> {
       rankings: {},
       characterName: ""
     };
+
   }
 
   async fetchCharacterData() {
@@ -40,22 +34,23 @@ class Rankings extends Component<{}, State> {
 
   renderGraphs() {
     if (_.isEmpty(this.state.rankings)) return <div>...Loading</div>;
-    return this.state.rankings.map((ranking: any, index: number) => {
-      return (
-        <XYPlot height={300} width={500} key={index}>
-          <VerticalGridLines />
-          <HorizontalGridLines />
-          <XAxis xType="time-utc" title="date" />
-          <YAxis title={ranking.name} />
-          <LineMarkSeries
-            style={{
-              strokeLinejoin: "round",
-              strokeWidth: 4
-            }}
-            data={ranking.data}
-          />
-        </XYPlot>
-      );
+    return this.state.rankings.map((ranking: Ranking[], index: number) => {
+      if (ranking[0])
+        return (
+          <Card key={index}>
+            <CardContent>
+              <Typography>
+                {ranking[0].encounterName}
+              </Typography>
+              <Typography>
+                Percentile: {ranking[0].percentile}
+              </Typography>
+              <Typography>
+                Spec: {ranking[0].spec}
+              </Typography>
+            </CardContent>
+          </Card>
+        );
     });
   }
 

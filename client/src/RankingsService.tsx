@@ -1,3 +1,5 @@
+import { Ranking } from "./data/Ranking";
+
 const bossNames = [
   "Taloc",
   "MOTHER",
@@ -17,26 +19,16 @@ type DataSet = {
 export function doThing(data: any) {
   let datas: DataSet[] = [];
 
-  bossNames.forEach(bossName => {
-    const goodData = data
+  return bossNames.map(bossName => {
+    return data
       .filter((ranking: any) => {
         return ranking.encounterName == bossName && ranking.difficulty == 4;
       })
       .sort(function(a: any, b: any) {
-        return a.startTime - b.startTime;
+        return a.percentile > b.percentile;
       })
       .map((ranking: any) => {
-        console.log(ranking);
-        return {
-          x: ranking.startTime,
-          y: ranking.percentile
-        };
+        return ranking
       });
-
-    datas.push({
-      name: bossName,
-      data: goodData
-    });
   });
-  return datas;
 }

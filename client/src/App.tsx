@@ -92,7 +92,7 @@ class App extends Component<Props, State> {
   constructor(props: any) {
     super(props);
     this.state = {
-      open: true
+      open: false
     };
   }
 
