@@ -40,7 +40,9 @@ class SideBar extends React.Component<Props, {}> {
           <ListItem button>
             <Link to="/rankings" onClick={this.props.closeDrawer}>Rankings</Link>
           </ListItem>
-          <ListItem button>Parses</ListItem>
+          <ListItem button>
+            <Link to="/parses" onClick={this.props.closeDrawer}>Parses</Link>
+          </ListItem>
         </List>
       </Drawer>
     );

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { getRankingsForCharacter } from "../api/Network";
-import { doThing } from "../RankingsService";
+import { buildRankingForEachBoss } from "../RankingsService";
 import _ from "underscore";
 import { Card, CardContent, Typography } from "@material-ui/core";
 import { Ranking } from "../data/Ranking";
@@ -23,7 +23,7 @@ class Rankings extends Component<{}, State> {
   async fetchCharacterData() {
     try {
       const rankings = await getRankingsForCharacter(this.state.characterName);
-      const modifiedRankings = await doThing(rankings);
+      const modifiedRankings = await buildRankingForEachBoss(rankings);
       this.setState({
         rankings: modifiedRankings
       });

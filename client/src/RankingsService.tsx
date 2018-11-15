@@ -11,7 +11,7 @@ const bossNames = [
   "G'huun"
 ];
 
-export function doThing(data: any) {
+export function buildRankingForEachBoss(data: any) {
   return bossNames.map(bossName => {
     return data
       .filter((ranking: Ranking) => {

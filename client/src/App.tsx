@@ -7,6 +7,7 @@ import { withStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Rankings from "./classes/Rankings";
 import Dashboard from "./functions/Dashboard";
 import { Route } from "react-router-dom";
+import Parses from "./classes/Parses";
 
 const drawerWidth = 240;
 const styles = (theme: Theme) =>
@@ -140,6 +141,7 @@ class App extends Component<Props, State> {
           <div className={classes.appBarSpacer} />
           <Route path="/" exact component={Dashboard} />
           <Route path="/rankings" component={Rankings}/>
+          <Route path="/parses" component={Parses}/>
         </main>
       </div>
     );
