@@ -21,7 +21,7 @@ export function buildRankingForEachBoss(data: any) {
         return a.percentile > b.percentile;
       })
       .map((ranking: Ranking) => {
-        return ranking
+        return ranking;
       });
   });
 }

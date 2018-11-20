@@ -139,8 +139,8 @@ class App extends Component<Props, State> {
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
           <Route path="/" exact component={Dashboard} />
-          <Route path="/rankings" component={Rankings}/>
-          <Route path="/parses" component={Parses}/>
+          <Route path="/rankings" component={Rankings} />
+          <Route path="/parses" component={Parses} />
         </main>
       </div>
     );

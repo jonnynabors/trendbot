@@ -17,7 +17,6 @@ class Parses extends Component<{}, State> {
       parses: {},
       characterName: ""
     };
-
   }
 
   async fetchCharacterParses() {

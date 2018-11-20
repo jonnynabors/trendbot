@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { getRankingsForCharacter } from "../api/Network";
 import { buildRankingForEachBoss } from "../RankingsService";
 import _ from "underscore";
-import { Card, CardContent, Typography } from "@material-ui/core";
+import { Card, CardContent, Typography, Grid } from "@material-ui/core";
 import { Ranking } from "../data/Ranking";
 
 interface State {
@@ -17,7 +17,6 @@ class Rankings extends Component<{}, State> {
       rankings: {},
       characterName: ""
     };
-
   }
 
   async fetchCharacterData() {
@@ -32,25 +31,35 @@ class Rankings extends Component<{}, State> {
     }
   }
 
+  determineRankingColor(ranking: number) {
+    if (ranking > 89) return "gold";
+    else if (ranking > 70) return "blueviolet";
+    else if (ranking > 50) return "dodgerblue";
+    else if (ranking > 25) return "green";
+    return "gray";
+  }
+
   renderGraphs() {
     if (_.isEmpty(this.state.rankings)) return <div>...Loading</div>;
     return this.state.rankings.map((ranking: Ranking[], index: number) => {
-      if (ranking[0])
+      if (ranking[0]) {
+        const rankingColor = this.determineRankingColor(ranking[0].percentile);
         return (
-          <Card key={index}>
-            <CardContent>
-              <Typography>
-                {ranking[0].encounterName}
-              </Typography>
-              <Typography>
-                Percentile: {ranking[0].percentile}
-              </Typography>
-              <Typography>
-                Spec: {ranking[0].spec}
-              </Typography>
-            </CardContent>
-          </Card>
+          <Grid item key={index} spacing={8} xs={12} sm={6}>
+            <Card style={{ backgroundColor: rankingColor }}>
+              <CardContent>
+                <Typography>{ranking[0].encounterName}</Typography>
+                <Typography>Percentile: {ranking[0].percentile}</Typography>
+                <Typography>Spec: {ranking[0].spec}</Typography>
+                <Typography>
+                  Date: {new Date(ranking[0].startTime).toDateString()}
+                </Typography>
+                <Typography>iLvl: {ranking[0].ilvlKeyOrPatch}</Typography>
+              </CardContent>
+            </Card>
+          </Grid>
         );
+      }
     });
   }
 
@@ -77,7 +86,9 @@ class Rankings extends Component<{}, State> {
         <button type="submit" onClick={this.submitCharacterName.bind(this)}>
           Submit
         </button>
-        {this.renderGraphs()}
+        <Grid container spacing={8}>
+          {this.renderGraphs()}
+        </Grid>
       </div>
     );
   }
