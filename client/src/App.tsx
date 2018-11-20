@@ -104,7 +104,6 @@ class App extends Component<Props, State> {
   };
 
   handleDrawerClose = () => {
-    console.log('hey')
     this.setState({ open: false });
   };
 
