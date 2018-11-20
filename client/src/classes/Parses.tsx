@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import { getRankingsForCharacter, getParsesForCharacter } from "../api/Network";
-import { buildRankingForEachBoss } from "../RankingsService";
+import { getParsesForCharacter } from "../api/Network";
 import _ from "underscore";
-import { Card, CardContent, Typography } from "@material-ui/core";
-import { Ranking } from "../data/Ranking";
+import { CharacterRanking } from "../data/CharacterRanking";
 
 interface State {
-  parses: any;
+  parses: CharacterRanking[];
   characterName: string;
 }
 
@@ -14,7 +12,7 @@ class Parses extends Component<{}, State> {
   constructor(props: any) {
     super(props);
     this.state = {
-      parses: {},
+      parses: [],
       characterName: ""
     };
   }

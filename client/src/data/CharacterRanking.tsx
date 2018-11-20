@@ -1,4 +1,4 @@
-export type Ranking = {
+export type CharacterRanking = {
   azeritePowers: any[];
   characterID: number;
   characterName: string;

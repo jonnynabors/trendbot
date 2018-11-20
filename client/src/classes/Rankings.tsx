@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { getRankingsForCharacter } from "../api/Network";
-import { buildRankingForEachBoss } from "../RankingsService";
+import { buildRankingForEachBoss } from "../CharacterRankingService";
 import _ from "underscore";
 import { Card, CardContent, Typography, Grid } from "@material-ui/core";
-import { Ranking } from "../data/Ranking";
+import { CharacterRanking } from "../data/CharacterRanking";
 
 interface State {
-  rankings: any;
+  rankings: CharacterRanking[];
   characterName: string;
 }
 
@@ -14,7 +14,7 @@ class Rankings extends Component<{}, State> {
   constructor(props: any) {
     super(props);
     this.state = {
-      rankings: {},
+      rankings: [],
       characterName: ""
     };
   }
@@ -41,26 +41,30 @@ class Rankings extends Component<{}, State> {
 
   renderGraphs() {
     if (_.isEmpty(this.state.rankings)) return <div>...Loading</div>;
-    return this.state.rankings.map((ranking: Ranking[], index: number) => {
-      if (ranking[0]) {
-        const rankingColor = this.determineRankingColor(ranking[0].percentile);
-        return (
-          <Grid item key={index} spacing={8} xs={12} sm={6}>
-            <Card style={{ backgroundColor: rankingColor }}>
-              <CardContent>
-                <Typography>{ranking[0].encounterName}</Typography>
-                <Typography>Percentile: {ranking[0].percentile}</Typography>
-                <Typography>Spec: {ranking[0].spec}</Typography>
-                <Typography>
-                  Date: {new Date(ranking[0].startTime).toDateString()}
-                </Typography>
-                <Typography>iLvl: {ranking[0].ilvlKeyOrPatch}</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        );
+    return this.state.rankings.map(
+      (ranking: CharacterRanking, index: number) => {
+        if (ranking[0]) {
+          const rankingColor = this.determineRankingColor(
+            ranking[0].percentile
+          );
+          return (
+            <Grid item key={index} xs={12} sm={6}>
+              <Card style={{ backgroundColor: rankingColor }}>
+                <CardContent>
+                  <Typography>{ranking[0].encounterName}</Typography>
+                  <Typography>Percentile: {ranking[0].percentile}</Typography>
+                  <Typography>Spec: {ranking[0].spec}</Typography>
+                  <Typography>
+                    Date: {new Date(ranking[0].startTime).toDateString()}
+                  </Typography>
+                  <Typography>iLvl: {ranking[0].ilvlKeyOrPatch}</Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          );
+        }
       }
-    });
+    );
   }
 
   async submitCharacterName() {

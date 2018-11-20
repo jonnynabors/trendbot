@@ -1,4 +1,4 @@
-import { Ranking } from "./data/Ranking";
+import { CharacterRanking } from "./data/CharacterRanking";
 
 const bossNames = [
   "Taloc",
@@ -14,13 +14,13 @@ const bossNames = [
 export function buildRankingForEachBoss(data: any) {
   return bossNames.map(bossName => {
     return data
-      .filter((ranking: Ranking) => {
+      .filter((ranking: CharacterRanking) => {
         return ranking.encounterName == bossName && ranking.difficulty == 4;
       })
-      .sort(function(a: Ranking, b: Ranking) {
+      .sort(function(a: CharacterRanking, b: CharacterRanking) {
         return a.percentile > b.percentile;
       })
-      .map((ranking: Ranking) => {
+      .map((ranking: CharacterRanking) => {
         return ranking;
       });
   });
